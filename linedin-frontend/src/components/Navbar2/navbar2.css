@@ -1,0 +1,15 @@
+.searchInput {
+  transition: width 0.5s;
+}
+.searchInput:focus {
+  width: 350px;
+}
+
+/* navbar2.css (optional) */
+.slide-enter {
+  transform: translateX(100%);
+}
+.slide-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease-in-out;
+}
