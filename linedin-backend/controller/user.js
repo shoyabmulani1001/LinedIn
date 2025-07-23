@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const User = require("../models/user");
 const bcryptjs = require("bcrypt");
 const { OAuth2Client } = require("google-auth-library");
+const jwt = require("jsonwebtoken");
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -67,6 +68,7 @@ exports.login = async (req, res) => {
     const userExist = await User.findOne({ email });
     // console.log(userExist);
     if (userExist && (await bcryptjs.compare(password, userExist.password))) {
+      let token = jwt.sign({ userId: userExist._id });
       return res.json({
         message: "Logged in sucessfully",
         sucess: "true",
